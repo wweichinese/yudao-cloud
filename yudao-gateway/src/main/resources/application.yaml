@@ -170,6 +170,19 @@ spring:
             - Path=/admin-api/ai/**
           filters:
             - RewritePath=/admin-api/ai/v3/api-docs, /v3/api-docs # 配置，保证转发到 /v3/api-docs
+        ## charge-server 服务
+        - id: charge-admin-api # 路由的编号
+          uri: grayLb://charge-server
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/admin-api/charge/**
+          filters:
+            - RewritePath=/admin-api/charge/v3/api-docs, /v3/api-docs # 配置，保证转发到 /v2/api-docs
+        - id: charge-app-api # 路由的编号
+          uri: grayLb://charge-server
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/app-api/charge/**
+          filters:
+            - RewritePath=/app-api/charge/v3/api-docs, /v3/api-docs
       x-forwarded:
         prefix-enabled: false # 避免 Swagger 重复带上额外的 /admin-api/system 前缀
 
@@ -224,6 +237,10 @@ knife4j:
       - name: ai-server
         service-name: ai-server
         url: /admin-api/ai/v3/api-docs
+      - name: charge-server
+        service-name: charge-server
+        url: /admin-api/charge/v3/api-docs
+
 
 --- #################### 芋道相关配置 ####################
 

@@ -22,4 +22,8 @@ public class WebSocketAuthorizeRequestsCustomizer extends AuthorizeRequestsCusto
         registry.requestMatchers(webSocketProperties.getPath()).permitAll();
     }
 
+    @Override
+    public void customize(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
+
+    }
 }

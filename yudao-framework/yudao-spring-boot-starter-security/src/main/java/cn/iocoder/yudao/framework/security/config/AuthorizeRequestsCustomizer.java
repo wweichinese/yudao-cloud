@@ -5,6 +5,7 @@ import org.springframework.core.Ordered;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 
 import javax.annotation.Resource;
 
@@ -33,4 +34,5 @@ public abstract class AuthorizeRequestsCustomizer
         return 0;
     }
 
+    public abstract void customize(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry);
 }
